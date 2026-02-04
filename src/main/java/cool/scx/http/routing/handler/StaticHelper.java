@@ -2,7 +2,6 @@ package cool.scx.http.routing.handler;
 
 import cool.scx.http.routing.RoutingContext;
 import dev.scx.http.exception.NotFoundException;
-import dev.scx.http.headers.range.Range;
 import dev.scx.http.media_type.FileFormat;
 import dev.scx.http.media_type.ScxMediaType;
 
@@ -37,7 +36,7 @@ public class StaticHelper {
         response.headers().set(ACCEPT_RANGES, "bytes");
 
         //2, 尝试解析 Range
-        var rangeStr = request.getHeader("Range");
+        var range = request.headers().range();
 
         //3, 设置 contentType (只有在未设置的时候才设置)
         if (response.contentType() == null) {
@@ -46,36 +45,29 @@ public class StaticHelper {
         }
 
         //3, 如果为空 则发送全量数据
-        if (rangeStr == null) {
+        if (range == null) {
             response.send(file);
             return;
         }
 
         //4, 尝试解析
-        var ranges = Range.parseRange(rangeStr);
         //目前我们只支持单个的部分请求
-        if (ranges.size() == 1) {
-            //获取第一个分段请求
-            var range = ranges.get(0);
-            var start = range.getStart();
-            var end = range.getEnd(fileLength);
+        //获取第一个分段请求
+        var start = range.getStart();
+        var end = range.getEnd(fileLength);
 
-            //计算需要发送的长度
-            var length = end - start + 1;
+        //计算需要发送的长度
+        var length = end - start + 1;
 
-            //我们需要构建如下的结构
-            // status: 206 Partial Content
-            response.statusCode(PARTIAL_CONTENT);
-            // Content-Range: bytes 0-1023/146515
-            response.setHeader(CONTENT_RANGE, "bytes " + start + "-" + end + "/" + fileLength);
-            // Content-Length: 1024
-            response.contentLength(length);
-            //发送
-            response.send(file, start, length);
-        } else {
-            // 这里是多个 部分请求 我们暂时不支持 所以全量发送
-            response.send(file);
-        }
+        //我们需要构建如下的结构
+        // status: 206 Partial Content
+        response.statusCode(PARTIAL_CONTENT);
+        // Content-Range: bytes 0-1023/146515
+        response.setHeader(CONTENT_RANGE, "bytes " + start + "-" + end + "/" + fileLength);
+        // Content-Length: 1024
+        response.contentLength(length);
+        //发送
+        response.send(file, start, length);
 
     }
 

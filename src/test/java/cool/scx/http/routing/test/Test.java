@@ -24,7 +24,7 @@ public class Test {
 //        router.route(-100000).handler(new CorsHandler().addOrigin("http://localhost:18899"));
 
         router.route().path("/abc").handler(c -> {
-            var bytes = c.request().body().asBytes();
+            var bytes = c.request().asBytes();
             System.out.println(bytes.length);
 //            var bbb=c.request().body().asMultiPart();
 //            for (var aByte : bbb) {
