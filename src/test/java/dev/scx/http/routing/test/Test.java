@@ -1,6 +1,6 @@
-package cool.scx.http.routing.test;
+package dev.scx.http.routing.test;
 
-import cool.scx.http.routing.Router;
+import dev.scx.http.routing.Router;
 import dev.scx.http.exception.UnauthorizedException;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package cool.scx.http.routing;
+package dev.scx.http.routing;
 
 import dev.scx.http.ScxHttpServerRequest;
 

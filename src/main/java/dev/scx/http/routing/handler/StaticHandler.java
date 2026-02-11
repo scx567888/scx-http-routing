@@ -1,6 +1,6 @@
-package cool.scx.http.routing.handler;
+package dev.scx.http.routing.handler;
 
-import cool.scx.http.routing.RoutingContext;
+import dev.scx.http.routing.RoutingContext;
 import dev.scx.function.Function1Void;
 import dev.scx.http.exception.NotFoundException;
 
@@ -11,7 +11,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-import static cool.scx.http.routing.handler.StaticHelper.sendStatic;
+import static dev.scx.http.routing.handler.StaticHelper.sendStatic;
 import static dev.scx.http.headers.HttpHeaderName.*;
 import static dev.scx.http.method.HttpMethod.GET;
 import static dev.scx.http.method.HttpMethod.HEAD;
