@@ -1,6 +1,6 @@
-package cool.scx.http.routing.handler;
+package dev.scx.http.routing.handler;
 
-import cool.scx.http.routing.RoutingContext;
+import dev.scx.http.routing.RoutingContext;
 import dev.scx.http.exception.NotFoundException;
 import dev.scx.http.media_type.FileFormat;
 import dev.scx.http.media_type.ScxMediaType;

@@ -1,6 +1,6 @@
-package cool.scx.http.routing.test;
+package dev.scx.http.routing.test;
 
-import cool.scx.http.routing.PathMatcher;
+import dev.scx.http.routing.PathMatcher;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
